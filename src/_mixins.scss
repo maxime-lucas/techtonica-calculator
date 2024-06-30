@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@import "./theme";
+
+@function lighten-color($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+@function darken-color($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+@function get-color-background(){
+    @return mat.get-theme-color($my-theme, background);
+}
+
+@function get-font-color-background(){
+    @return mat.get-theme-color($my-theme, inverse-surface);
+}
+
+@function get-color-background-lighten(){
+    @return lighten-color(mat.get-theme-color($my-theme, background),30%);
+}
+
+@function get-color-background-darken(){
+    @return darken-color(mat.get-theme-color($my-theme, background),30%);
+}

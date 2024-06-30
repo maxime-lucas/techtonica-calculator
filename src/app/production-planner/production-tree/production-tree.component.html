@@ -1,0 +1,24 @@
+<div class="flex-column">
+    <div class="flex-row" style="align-items:center">
+        <img [src]="node.icon_url" style="max-width: 40px; margin-right:1rem"/>
+
+        @if( node.node_type == 'resource' ) {
+        
+            {{ node.resource_quantity }} x {{ node.resource_label }}
+        
+        } @else {
+        
+            <div class="flex-column">
+                <span>{{ node.machine_label }} (x{{node.machine_quantity}}) </span>
+                <span>{{ node.parent?.resource_label }} ({{node.parent?.resource_quantity}} units/min)</span>
+            </div>
+
+        }
+    </div>
+    @for(childNode of node.children; track $index){
+    <div class="flex-row">
+        <span style="width:50px"></span>
+        <app-production-tree [node]="childNode"></app-production-tree>
+    </div>
+    }
+</div>

@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="row">
+            @for(rootNode of productionTrees;track $index){
+            <div class="col-lg-6">
+                <app-production-tree [node]="rootNode"></app-production-tree>
+            </div>
+            }
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="flex-row">
+                <div class="spacer"></div>
+                <button mat-flat-button color="primary" (click)="onClickAddItem()">Add an item</button>
+            </div>
+            <div class="flex-row">
+                <div class="flex-column flex-grow-1">
+                    @for(output of outputs;track output.item.id){
+                    <div class="flex-row flex-grow-1" background-color="red">
+                        <img [src]="output.item.icon_url" style="max-width: 75px;">
+                        <div class="flex-column flex-grow-1" >
+                            <div class="flex-row flex-grow-1" style="align-items: center;">
+                                <span>{{output.item.label}}</span>
+                                <div class="spacer"></div>
+                                @if(output.recipes.length > 0){
+                                <select #recipe (change)="onChangeRecipe(output, recipe.value)">
+                                    @for(recipe of output.recipes;track recipe.id){
+                                    <option [value]="recipe.id">{{ recipe.label }}</option>
+                                    }
+                                </select>
+                                } @else {
+                                    {{ 'No recipe' }}
+                                }
+
+                                @if(output.machines.length > 0){
+                                <select #machine (change)="onChangeMachine(output, machine.value)">
+                                    @for(machine of output.machines;track machine.id){
+                                    <option [value]="machine.id">{{ machine.label }}</option>
+                                    }
+                                </select>
+                                } @else {
+                                    {{ 'No machine' }}
+                                }
+                            </div>
+                            <div class="flex-row flex-grow-1" style="align-items: center;">
+                                <input #quantity type="number" [(ngModel)]="output.quantity" min="0" (change)="onChangeQuantity(output.item, quantity.value)"/>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

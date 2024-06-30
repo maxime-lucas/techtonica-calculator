@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import "_theme.scss";
+
+html {
+    @include mat.all-component-themes($my-theme);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.spacer {
+    display: flex;
+    flex-grow: 1;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.text-center {
+    text-align: center;
+}
+
+@for $i from 5 through 20 {
+    .gap-#{$i} {
+        gap: #{$i}px;
+    }
+    .padding-#{$i} {
+        padding: #{$i}px;
+    }
+}

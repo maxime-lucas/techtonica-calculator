@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Available items for production</h2>
+<mat-dialog-content>
+    <div class="flex-column gap-20">
+        @for(category of categories;track category.name){
+            <div class="row category-name">
+                {{category.name}}
+            </div>
+            <div class="row gx-3 gy-3">
+                @for(item of category.items;track item.id){
+                    <div class="col-sm-2">
+                        <div class="item" [mat-dialog-close]="item">
+                            <img [src]="item.icon_url">
+                            <h6><strong>{{item.label}}</strong></h6>
+                        </div>
+                    </div>
+                }
+            </div>
+            }
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Okay</button>
+</mat-dialog-actions>

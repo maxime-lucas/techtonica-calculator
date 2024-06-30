@@ -1,0 +1,21 @@
+@import "../../mixins";
+
+:host {
+    display: flex;
+    flex-grow: 1;
+    background-color: get-color-background();
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    flex-direction: row;
+    gap:20px;
+    padding:20px;
+    color: get-font-color-background();
+}
+
+// .card {
+//     display:flex;
+//     flex-grow: 1;
+//     background-color: #303030;
+//     border-radius:5px;
+// }
