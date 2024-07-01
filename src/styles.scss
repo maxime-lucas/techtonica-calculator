@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @import "_theme.scss";
+@import "_mixins.scss";
 
 html {
     @include mat.all-component-themes($my-theme);
@@ -46,4 +47,20 @@ body {
     .padding-#{$i} {
         padding: #{$i}px;
     }
+    .margin-#{$i} {
+        margin: #{$i}px;
+    }
+}
+
+.bg-background-darken {
+    background-color: get-color-background-darken();
+}
+
+.bg-background-lighten {
+    background-color: get-color-background-lighten();
+}
+
+.app-background {
+    background-color: get-color-background();
+    color: get-font-color-background();
 }

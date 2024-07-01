@@ -1,56 +1,91 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-7">
-            <div class="row">
-            @for(rootNode of productionTrees;track $index){
-            <div class="col-lg-6">
-                <app-production-tree [node]="rootNode"></app-production-tree>
-            </div>
-            }
-            </div>
+    <div class="row mb-3 mt-3">
+        <div class="col-lg-12">
+            <mat-card appearance="outlined">
+                <mat-card-content>Planificateur de production</mat-card-content>
+              </mat-card>
         </div>
-        <div class="col-lg-5">
-            <div class="flex-row">
-                <div class="spacer"></div>
-                <button mat-flat-button color="primary" (click)="onClickAddItem()">Add an item</button>
-            </div>
-            <div class="flex-row">
-                <div class="flex-column flex-grow-1">
-                    @for(output of outputs;track output.item.id){
-                    <div class="flex-row flex-grow-1" background-color="red">
-                        <img [src]="output.item.icon_url" style="max-width: 75px;">
-                        <div class="flex-column flex-grow-1" >
-                            <div class="flex-row flex-grow-1" style="align-items: center;">
-                                <span>{{output.item.label}}</span>
-                                <div class="spacer"></div>
-                                @if(output.recipes.length > 0){
-                                <select #recipe (change)="onChangeRecipe(output, recipe.value)">
-                                    @for(recipe of output.recipes;track recipe.id){
-                                    <option [value]="recipe.id">{{ recipe.label }}</option>
-                                    }
-                                </select>
-                                } @else {
-                                    {{ 'No recipe' }}
-                                }
+    </div>
+    <div class="row">
+        
+        <div class="col-sm-4">
 
-                                @if(output.machines.length > 0){
-                                <select #machine (change)="onChangeMachine(output, machine.value)">
-                                    @for(machine of output.machines;track machine.id){
-                                    <option [value]="machine.id">{{ machine.label }}</option>
+            <mat-card appearance="outlined">
+                <mat-card-content>
+                    <mat-tab-group>
+                        <mat-tab label="Outputs">
+                            <div class="flex-column mt-3 mb-3">
+                                <div class="flex-row">
+                                    <div class="spacer"></div>
+                                    <button mat-flat-button color="primary" (click)="onClickAddItem()">Add an item</button>
+                                </div>
+                                <div class="flex-row">
+                                    <div class="flex-column flex-grow-1">
+                                        @for(output of outputs;track output.item.id){
+                                        <div class="item-output mt-3">
+                                            <img [src]="output.item.icon_url" class="mx-3">
+                                            <div class="flex-column flex-grow-1" >
+                                                <div class="flex-row flex-grow-1" style="align-items: center;">
+                                                    <span>{{output.item.label}}</span>
+                                                    <div class="spacer"></div>
+                                                    @if(output.recipes.length > 0){
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select  #recipe (change)="onChangeRecipe(output, recipe.value)" [(ngModel)]="output.selected_recipe">
+                                                            @for(recipe of output.recipes;track recipe.id){
+                                                            <mat-option [value]="recipe">{{ recipe.label }}</mat-option>
+                                                            }
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    } @else {
+                                                        {{ 'No recipe' }}
+                                                    }
+                    
+                                                    @if(output.machines.length > 0){
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-select #machine (change)="onChangeMachine(output, machine.value)" [(ngModel)]="output.selected_machine">
+                                                            @for(machine of output.machines;track machine.id){
+                                                            <mat-option [value]="machine">{{ machine.label }}</mat-option>
+                                                            }
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    } @else {
+                                                        {{ 'No machine' }}
+                                                    }
+                                                </div>
+                                                <div class="flex-row flex-grow-1" style="align-items: center;">
+                                                    <input #quantity type="number" [(ngModel)]="output.quantity" min="0" (change)="onChangeQuantity(output.item, quantity.value)"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-sm-8">
+
+            <mat-card appearance="outlined">
+                <mat-card-content>
+                    <mat-tab-group>
+                        <mat-tab label="Tree">
+                            <div class="container-fluid">
+                                <div class="row mt-3">
+                                    @for(rootNode of productionTrees;track $index){
+                                        <div class="col-lg-6">
+                                            <app-production-tree [node]="rootNode"></app-production-tree>
+                                        </div>
                                     }
-                                </select>
-                                } @else {
-                                    {{ 'No machine' }}
-                                }
+                                    </div>
                             </div>
-                            <div class="flex-row flex-grow-1" style="align-items: center;">
-                                <input #quantity type="number" [(ngModel)]="output.quantity" min="0" (change)="onChangeQuantity(output.item, quantity.value)"/>
-                            </div>
-                        </div>
-                    </div>
-                    }
-                </div>
-            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </div>

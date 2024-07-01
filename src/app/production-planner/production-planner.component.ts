@@ -40,11 +40,12 @@ export class ProductionPlannerComponent implements OnInit {
     this.productionPlannerService.updateOutputQuantity(item, newQuantity);
   }
 
-  onChangeRecipe(output:ItemOutput, newRecipeID:string){
-    this.productionPlannerService.updateOutputRecipe(output, newRecipeID)
+  onChangeRecipe(output:ItemOutput, newRecipe:Recipe){
+    this.productionPlannerService.updateOutputRecipe(output, newRecipe.id)
   }
 
-  onChangeMachine(output:ItemOutput, newMachineID:string){
-    this.productionPlannerService.updateOutputMachine(output, newMachineID)
+  onChangeMachine(output:ItemOutput, newMachine:Machine){
+    alert(newMachine);
+    this.productionPlannerService.updateOutputMachine(output, newMachine.id)
   }
 }

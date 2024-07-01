@@ -9,6 +9,9 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { ItemsDialogComponent } from "./production-planner/items-dialog/items-dialog.component";
 import { FormsModule } from "@angular/forms";
 import { ProductionTreeComponent } from "./production-planner/production-tree/production-tree.component";
+import { MatCardModule } from "@angular/material/card";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
     declarations: [
@@ -23,7 +26,10 @@ import { ProductionTreeComponent } from "./production-planner/production-tree/pr
       MatButtonModule,
       MatIconModule,
       MatDialogModule,
-      FormsModule
+      FormsModule,
+      MatCardModule,
+      MatTabsModule,
+      MatSelectModule
     ],
     providers: [
     ],
